@@ -1,5 +1,6 @@
 package med.manfrin.api.controllers;
 
+import jakarta.validation.Valid;
 import med.manfrin.api.domain.medico.Medico;
 import med.manfrin.api.dtos.medico.DadosCadastroMedico;
 import med.manfrin.api.repositories.MedicoRepository;
@@ -16,7 +17,7 @@ public class MedicoController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody DadosCadastroMedico dados){
+    public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados){
         repository.save(new Medico(dados));
     }
 }
