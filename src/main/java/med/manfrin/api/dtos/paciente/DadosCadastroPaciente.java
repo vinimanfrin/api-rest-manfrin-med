@@ -1,14 +1,15 @@
-package med.manfrin.api.dtos.medico;
+package med.manfrin.api.dtos.paciente;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import med.manfrin.api.domain.medico.Especialidade;
 import med.manfrin.api.dtos.endereco.DadosEndereco;
+import org.hibernate.validator.constraints.br.CPF;
 
-public record DadosCadastroMedico(
+public record DadosCadastroPaciente(
+
         @NotBlank
         String nome,
 
@@ -18,13 +19,11 @@ public record DadosCadastroMedico(
         @NotBlank @Pattern(regexp = "\\d{11}")
         String telefone,
 
-        @NotBlank @Pattern(regexp = "\\d{4,6}") //expressão regular , são de 4 a 6 digitos
-        String crm,
-
-        @NotNull
-        Especialidade especialidade,
+        @NotBlank @CPF
+        String cpf,
 
         @NotNull @Valid
         DadosEndereco dadosEndereco
+
 ) {
 }
