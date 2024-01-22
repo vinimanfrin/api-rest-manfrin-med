@@ -3,6 +3,7 @@ package med.manfrin.api.domain.medico;
 import jakarta.persistence.*;
 import lombok.*;
 import med.manfrin.api.domain.endereco.Endereco;
+import med.manfrin.api.dtos.medico.DadosCadastroMedico;
 
 @Table(name = "medicos")
 @Entity(name = "medicos")
@@ -24,4 +25,12 @@ public class Medico {
 
     @Embedded
     private Endereco endereco;
+
+    public Medico(DadosCadastroMedico dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.crm = dados.crm();
+        this.especialidade = dados.especialidade();
+        this.endereco = new Endereco(dados.dadosEndereco());
+    }
 }
