@@ -1,4 +1,4 @@
-package med.manfrin.api.infra;
+package med.manfrin.api.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
