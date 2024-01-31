@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import med.manfrin.api.domain.medico.Medico;
 import med.manfrin.api.domain.paciente.Paciente;
+import med.manfrin.api.dtos.consulta.DadosAgendamentoConsulta;
 
 import java.time.LocalDateTime;
 
