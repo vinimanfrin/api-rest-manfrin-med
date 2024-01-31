@@ -2,7 +2,7 @@ package med.manfrin.api.controllers;
 
 import jakarta.validation.Valid;
 import med.manfrin.api.dtos.consulta.DadosAgendamentoConsulta;
-import med.manfrin.api.service.AgendamentoConsultaService;
+import med.manfrin.api.service.consulta.AgendamentoConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;

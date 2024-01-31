@@ -1,4 +1,4 @@
-package med.manfrin.api.service;
+package med.manfrin.api.service.consulta;
 
 import med.manfrin.api.domain.consulta.Consulta;
 import med.manfrin.api.domain.medico.Medico;
