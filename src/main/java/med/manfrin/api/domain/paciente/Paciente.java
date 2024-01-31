@@ -7,7 +7,7 @@ import med.manfrin.api.dtos.paciente.DadosAtualizacaoPaciente;
 import med.manfrin.api.dtos.paciente.DadosCadastroPaciente;
 
 @Table(name = "pacientes")
-@Entity(name = "pacientes")
+@Entity(name = "Paciente")
 @Getter
 @Setter
 @NoArgsConstructor

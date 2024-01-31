@@ -3,6 +3,7 @@ package med.manfrin.api.service.consulta;
 import med.manfrin.api.domain.consulta.Consulta;
 import med.manfrin.api.domain.medico.Medico;
 import med.manfrin.api.dtos.consulta.DadosAgendamentoConsulta;
+import med.manfrin.api.dtos.consulta.DadosDetalhamentoConsulta;
 import med.manfrin.api.infra.exception.ValidacaoAgendamentoException;
 import med.manfrin.api.repositories.ConsultaRepository;
 import med.manfrin.api.repositories.MedicoRepository;
@@ -29,7 +30,7 @@ public class AgendamentoConsultaService {
     private List<ValidadorAgendamentoConsulta> validadores;
 
 
-    public void agendar(DadosAgendamentoConsulta dados){
+    public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados){
         if (!pacienteRepository.existsById(dados.idPaciente())){
             throw new ValidacaoAgendamentoException("Id do paciente informado não existe");
         }
@@ -42,8 +43,13 @@ public class AgendamentoConsultaService {
 
         var paciente = pacienteRepository.getReferenceById(dados.idPaciente());
         var medico = escolherMedico(dados);
+        if (medico == null){
+            throw new ValidacaoAgendamentoException("Não existe médico disponivel nessa data");
+        }
         var consulta = new Consulta(null,medico,paciente,dados.data());
         consultaRepository.save(consulta);
+
+        return new DadosDetalhamentoConsulta(consulta);
     }
 
     private Medico escolherMedico(DadosAgendamentoConsulta dados) {

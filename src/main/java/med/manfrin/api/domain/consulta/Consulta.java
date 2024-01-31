@@ -9,7 +9,7 @@ import med.manfrin.api.dtos.consulta.DadosAgendamentoConsulta;
 import java.time.LocalDateTime;
 
 @Table(name = "consultas")
-@Entity(name = "consultas")
+@Entity(name = "Consulta")
 @Getter
 @Setter
 @NoArgsConstructor

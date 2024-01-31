@@ -1,6 +1,7 @@
 package med.manfrin.api.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.coyote.Response;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,11 @@ public class TratadorDeErros {
     public ResponseEntity<String> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
         var erros = ex.getMessage();
         return ResponseEntity.status(HttpStatus.CONFLICT).body(erros);
+    }
+
+    @ExceptionHandler(ValidacaoAgendamentoException.class)
+    public ResponseEntity tratarErroRegraDeNegocio(ValidacaoAgendamentoException ex){
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     private record DadosErroValidacao(String campo, String mensagem){
