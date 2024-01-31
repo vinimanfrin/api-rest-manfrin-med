@@ -7,8 +7,11 @@ import med.manfrin.api.infra.exception.ValidacaoAgendamentoException;
 import med.manfrin.api.repositories.ConsultaRepository;
 import med.manfrin.api.repositories.MedicoRepository;
 import med.manfrin.api.repositories.PacienteRepository;
+import med.manfrin.api.service.consulta.validacoes.ValidadorAgendamentoConsulta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AgendamentoConsultaService {
@@ -22,6 +25,9 @@ public class AgendamentoConsultaService {
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    @Autowired
+    private List<ValidadorAgendamentoConsulta> validadores;
+
 
     public void agendar(DadosAgendamentoConsulta dados){
         if (!pacienteRepository.existsById(dados.idPaciente())){
@@ -31,6 +37,8 @@ public class AgendamentoConsultaService {
         if (dados.idMedico() != null && !medicoRepository.existsById(dados.idMedico())){
             throw new ValidacaoAgendamentoException("Id do médico informado não existe");
         }
+
+        validadores.forEach(v -> v.validar(dados));
 
         var paciente = pacienteRepository.getReferenceById(dados.idPaciente());
         var medico = escolherMedico(dados);

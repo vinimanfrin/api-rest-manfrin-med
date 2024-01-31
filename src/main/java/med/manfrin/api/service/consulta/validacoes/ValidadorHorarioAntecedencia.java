@@ -2,11 +2,13 @@ package med.manfrin.api.service.consulta.validacoes;
 
 import med.manfrin.api.dtos.consulta.DadosAgendamentoConsulta;
 import med.manfrin.api.infra.exception.ValidacaoAgendamentoException;
+import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class ValidadorHorarioAntecedencia {
+@Component
+public class ValidadorHorarioAntecedencia implements ValidadorAgendamentoConsulta {
 
     public void validar(DadosAgendamentoConsulta dados){
         var dataConsulta = dados.data();
